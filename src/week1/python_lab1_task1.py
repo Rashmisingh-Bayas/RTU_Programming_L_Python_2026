@@ -27,17 +27,28 @@ Examples (these are also used to check your work):
 0.0
 """
 
-# TODO: import math
+import math
 
 
 def circle_area(radius: float) -> float:
     """Return the area of a circle given its radius (unrounded)."""
-    # TODO: implement formula using math.pi
-    raise NotImplementedError("circle_area() is not implemented yet")
+    # Formula: pi * r^2
+    area = math.pi * (radius**2)
+    return area
 
 
 if __name__ == "__main__":
     # Keep all input() calls inside this block, otherwise the autograder
     # cannot import your file.
-    # TODO: ask for user input, call circle_area(), and print formatted result
-    pass
+
+    # Ask the user for the radius
+    radius_input = input("Enter radius: ")
+
+    # Convert the string input to a float so we can do math with it
+    radius = float(radius_input)
+
+    # Call our function to calculate the area
+    result = circle_area(radius)
+
+    # Print the result formatted to 2 decimal places using an f-string
+    print(f"Area of the circle: {result:.2f}")

@@ -57,30 +57,84 @@ Examples (these are also used to check your work):
 
 def count_characters(text: str) -> int:
     """Count characters that are not whitespace."""
-    # TODO: implement
-    raise NotImplementedError("count_characters() is not implemented yet")
+    count = 0
+    # Loop through every character in the string
+    for char in text:
+        # .isspace() checks if it's a space, tab, or newline
+        if not char.isspace():
+            count += 1
+    return count
 
 
 def count_words(text: str) -> int:
     """Count number of whitespace-separated words."""
-    # TODO: implement
-    raise NotImplementedError("count_words() is not implemented yet")
+    # .split() automatically breaks the string into a list of words
+    words = text.split()
+    return len(words)
 
 
 def extract_numbers(text: str) -> list[int]:
     """Return a list of the integers found in text, in order."""
-    # TODO: implement
-    raise NotImplementedError("extract_numbers() is not implemented yet")
+    numbers = []
+
+    # Split the text into words
+    words = text.split()
+
+    for word in words:
+        # Remove punctuation from the end of the word
+        clean_word = word.rstrip(".,!?;:")
+
+        # A neat trick to check if a string is a valid integer:
+        # If we try to convert it and it fails, it's not a number.
+        try:
+            number = int(clean_word)
+            numbers.append(number)
+        except ValueError:
+            # If int() fails (like for "3.5" or "abc123"), we just skip it
+            pass
+
+    return numbers
 
 
 def analyze_text(text: str) -> dict:
     """Return a dict with characters, words, numbers, sum and average."""
-    # TODO: call the helper functions and compute sum and average
-    raise NotImplementedError("analyze_text() is not implemented yet")
+    # Call our helper functions
+    chars = count_characters(text)
+    words = count_words(text)
+    nums = extract_numbers(text)
+
+    # Calculate sum (sum of an empty list is 0, which is perfect)
+    total_sum = sum(nums)
+
+    # Calculate average carefully to avoid dividing by zero
+    if len(nums) > 0:
+        average = total_sum / len(nums)
+    else:
+        average = 0.0
+
+    # Return the final dictionary
+    return {
+        "characters": chars,
+        "words": words,
+        "numbers": nums,
+        "sum": total_sum,
+        "average": average,
+    }
 
 
 if __name__ == "__main__":
     # Keep all input() calls inside this block, otherwise the autograder
     # cannot import your file.
-    # TODO: read input, call analyze_text(), and print results
-    pass
+
+    # Read a line of text from the user
+    user_text = input("Enter text: ")
+
+    # Analyze it
+    result = analyze_text(user_text)
+
+    # Print the summary, rounding the average to 2 decimals
+    print(f"Characters (no spaces): {result['characters']}")
+    print(f"Words: {result['words']}")
+    print(f"Numbers: {result['numbers']}")
+    print(f"Sum: {result['sum']}")
+    print(f"Average: {result['average']:.2f}")

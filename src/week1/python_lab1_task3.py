@@ -32,12 +32,34 @@ Examples (these are also used to check your work):
 
 def analyze_sentence(text: str) -> tuple[int, int, bool]:
     """Return (length, word count, contains 'python') for the given text."""
-    # TODO: implement function logic
-    raise NotImplementedError("analyze_sentence() is not implemented yet")
+
+    # 1. Character count: len() counts every character, including spaces
+    char_count = len(text)
+
+    # 2. Word count: .split() breaks the string into a list of words based on whitespace
+    words = text.split()
+    word_count = len(words)
+
+    # 3. Check for 'python' ignoring case.
+    # We convert the text to lowercase, then check if "python" is inside it.
+    # This handles "Python", "PYTHON", and "Pythonic".
+    contains_python = "python" in text.lower()
+
+    # Return the three results as a tuple
+    return (char_count, word_count, contains_python)
 
 
 if __name__ == "__main__":
     # Keep all input() calls inside this block, otherwise the autograder
     # cannot import your file.
-    # TODO: read sentence from input, call function, and print results
-    pass
+
+    # Ask the user for a sentence
+    user_sentence = input("Enter a sentence: ")
+
+    # Call the function and unpack the tuple into three variables
+    chars, words, has_python = analyze_sentence(user_sentence)
+
+    # Print the results exactly as requested
+    print(f"Characters: {chars}")
+    print(f"Words: {words}")
+    print(f"Contains 'Python': {has_python}")
