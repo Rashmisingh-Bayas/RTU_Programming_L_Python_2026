@@ -63,8 +63,8 @@ def largest_city(populations: dict[str, int]) -> tuple[str, int]:
     if not populations:
         return ("", 0)
 
-    # max() returns the first key it encounters if there is a tie
-    city = max(populations, key=populations.get)
+    # Using a lambda function fixes the linter warning
+    city = max(populations, key=lambda k: populations[k])
     return (city, populations[city])
 
 
@@ -73,7 +73,8 @@ def smallest_city(populations: dict[str, int]) -> tuple[str, int]:
     if not populations:
         return ("", 0)
 
-    city = min(populations, key=populations.get)
+    # Using a lambda function fixes the linter warning
+    city = min(populations, key=lambda k: populations[k])
     return (city, populations[city])
 
 
